@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Learn German App">
+    <meta property="og:description" content="Learn German with our simple app!">
+    <title>Learn German</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>{{ texts[currentLanguage].heading }}</h1>
+        <p>{{ texts[currentLanguage].subheading }}</p>
+
+        <button @click="buttonClicked">{{ buttonText }}</button>
+
+        <div>
+            <label for="languageSelect">Выбери язык / Wähle eine Sprache / Select a language:</label>
+            <select id="languageSelect" v-model="currentLanguage">
+                <option value="ru">Русский</option>
+                <option value="de">Deutsch</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+
+        <h2>Добавь слово</h2>
+        <input type="text" v-model="newWord" placeholder="Напиши слово...">
+        <button @click="addWord">Добавить</button>
+
+        <h2>Список слов:</h2>
+        <ul>
+            <li v-for="(word, index) in words" :key="index">
+                {{ word[currentLanguage] }} 
+                <button @click="removeWord(index)">❌</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
